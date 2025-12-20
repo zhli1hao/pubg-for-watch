@@ -1,48 +1,58 @@
-/* Ensure proper scaling for 320x320 resolution */
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #222;
+/* File Updated: Mobile Optimization for Login Buttons and Inputs */
+
+/* Enhancements for Mobile Logins */
+button.login-mobile {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    display: block;
+}
+input[type="text"].mobile-input, input[type="email"].mobile-input {
+    width: calc(100% - 40px); /* Adjust for padding */
+    padding: 10px;
+    font-size: 14px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: block;
 }
 
-#game-container {
-  position: relative;
-  width: 320px;
-  height: 320px;
-  border: 1px solid #000;
+/* Styles for Social Media Login Buttons */
+button.login-social {
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 5px;
+    max-width: 300px;
+    width: 100%;
+}
+button.login-social-facebook {
+    background-color: #3b5998;
+    color: white;
+}
+button.login-social-google {
+    background-color: #db4437;
+    color: white;
 }
 
-#game-canvas {
-  width: 100%;
-  height: 100%;
-  display: block;
-  background-color: #111;
-}
-
-/* Overlay for minimal controls */
-#controls-overlay {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 5px;
-}
-
-.control-button {
-  background: #333;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.control-button:active {
-  background: #555;
+/* Guest Login Enhancements */
+button.guest-login {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    max-width: 300px;
+    width: 100%;
+    margin: 10px auto;
+    display: block;
 }
