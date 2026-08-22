@@ -1,0 +1,34 @@
+{
+  "name": "pubg-for-watch",
+  "version": "0.0.1",
+  "description": "PUBG FOR WATCH - packaging helper (Electron/Capacitor)",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "build:electron": "npm run dist",
+    "cap:init": "npx cap init \"PUBG-FOR-WATCH\" com.example.pubgforwatch --web-dir=.",
+    "cap:add-android": "npx cap add android",
+    "cap:copy": "npx cap copy android"
+  },
+  "build": {
+    "appId": "com.example.pubgforwatch",
+    "files": [
+      "**/*",
+      "!node_modules/**",
+      "!**/*.md",
+      "!**/*.yml",
+      "!**/*.yaml",
+      "!.github/**"
+    ],
+    "win": { "target": ["nsis"] },
+    "mac": { "target": ["dmg"] },
+    "linux": { "target": ["AppImage"] }
+  },
+  "devDependencies": {
+    "electron": "^26.0.0",
+    "electron-builder": "^24.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0"
+  }
+}
