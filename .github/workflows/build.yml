@@ -6,9 +6,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          mkdir -p app/src/main/java/com/example/myapp
+          mkdir -p app/src/main/java/com/example/pubgwatch
           mkdir -p app/src/main/res/values
-          mkdir -p gradle/wrapper
       - run: |
           cat > settings.gradle.kts << 'EOF'
           pluginManagement {
@@ -64,8 +63,8 @@ jobs:
           </manifest>
           EOF
       - run: |
-          cat > app/src/main/java/com/example/myapp/MainActivity.kt << 'EOF'
-          package com.example.myapp
+          cat > app/src/main/java/com/example/pubgwatch/MainActivity.kt << 'EOF'
+          package com.example.pubgwatch
           import android.app.Activity
           import android.os.Bundle
           class MainActivity : Activity() {
@@ -81,25 +80,13 @@ jobs:
               <string name="app_name">PUBG Watch</string>
           </resources>
           EOF
-      - run: |
-          cat > gradle/wrapper/gradle-wrapper.properties << 'EOF'
-          distributionBase=GRADLE_USER_HOME
-          distributionPath=wrapper/dists
-          distributionUrl=https\://services.gradle.org/distributions/gradle-8.4-bin.zip
-          zipStoreBase=GRADLE_USER_HOME
-          zipStorePath=wrapper/dists
-          EOF
-      - run: |
-          echo '#!/bin/sh' > gradlew
-          echo 'exec java -jar gradle/wrapper/gradle-wrapper.jar "$@"' >> gradlew
-          chmod +x gradlew
       - run: ls -la settings.gradle.kts build.gradle.kts app/build.gradle.kts
       - uses: actions/setup-java@v4
         with:
           java-version: "17"
           distribution: "temurin"
       - uses: android-actions/setup-android@v4
-      - run: ./gradlew :app:assembleDebug --no-daemon
+      - run: gradle :app:assembleDebug --no-daemon
       - run: |
           mkdir -p outputs
           mv app/build/outputs/apk/debug/app-debug.apk outputs/ 2>/dev/null || true
