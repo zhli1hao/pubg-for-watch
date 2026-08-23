@@ -11,49 +11,30 @@ jobs:
       - run: |
           cat > settings.gradle.kts << 'EOF'
           pluginManagement {
-              repositories {
-                  google()
-                  gradlePluginPortal()
-              }
+              repositories { google(); gradlePluginPortal() }
           }
           rootProject.name = "pubg-for-watch"
           include(":app")
           EOF
       - run: |
           cat > build.gradle.kts << 'EOF'
-          plugins {
-              id("com.android.application") version "8.1.0" apply false
-          }
+          plugins { id("com.android.application") version "8.1.0" apply false }
           EOF
       - run: |
           cat > app/build.gradle.kts << 'EOF'
-          plugins {
-              id("com.android.application")
-          }
+          plugins { id("com.android.application") }
           android {
               namespace = "com.example.pubgwatch"
               compileSdk = 34
-              defaultConfig {
-                  applicationId = "com.example.pubgwatch"
-                  minSdk = 24
-                  targetSdk = 34
-              }
-              buildTypes {
-                  getByName("debug") {
-                      isDebuggable = true
-                  }
-              }
+              defaultConfig { applicationId = "com.example.pubgwatch"; minSdk = 24; targetSdk = 34 }
           }
           EOF
       - run: |
           cat > app/src/main/AndroidManifest.xml << 'EOF'
           <?xml version="1.0" encoding="utf-8"?>
-          <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-              package="com.example.pubgwatch">
+          <manifest package="com.example.pubgwatch">
               <application android:label="PUBG Watch">
-                  <activity
-                      android:name=".MainActivity"
-                      android:exported="true">
+                  <activity android:name=".MainActivity" android:exported="true">
                       <intent-filter>
                           <action android:name="android.intent.action.MAIN"/>
                           <category android:name="android.intent.category.LAUNCHER"/>
@@ -65,37 +46,26 @@ jobs:
       - run: |
           cat > app/src/main/java/com/example/pubgwatch/MainActivity.kt << 'EOF'
           package com.example.pubgwatch
-          import android.app.Activity
-          import android.os.Bundle
+          import android.app.Activity; import android.os.Bundle
           class MainActivity : Activity() {
-              override fun onCreate(savedInstanceState: Bundle?) {
-                  super.onCreate(savedInstanceState)
-              }
+              override fun onCreate(savedInstanceState: Bundle?) { super.onCreate(savedInstanceState) }
           }
           EOF
       - run: |
           cat > app/src/main/res/values/strings.xml << 'EOF'
           <?xml version="1.0" encoding="utf-8"?>
-          <resources>
-              <string name="app_name">PUBG Watch</string>
-          </resources>
+          <resources><string name="app_name">PUBG Watch</string></resources>
           EOF
-      - run: ls -la settings.gradle.kts build.gradle.kts app/build.gradle.kts
       - uses: actions/setup-java@v4
         with:
           java-version: "17"
           distribution: "temurin"
       - uses: android-actions/setup-android@v4
-      - run: gradle :app:assembleDebug --no-daemon
       - run: |
-          mkdir -p outputs
-          mv app/build/outputs/apk/debug/app-debug.apk outputs/ 2>/dev/null || true
-          zip -r android-release-bundle.zip . -x "*.git*" -x "*.github*"
+          curl -L https://services.gradle.org/distributions/gradle-8.4-bin.zip -o gradle.zip
+          unzip -q gradle.zip
+          ./gradle-8.4/bin/gradle :app:assembleDebug --no-daemon
       - uses: actions/upload-artifact@v4
         with:
           name: app-debug-apk
-          path: outputs/app-debug.apk
-      - uses: actions/upload-artifact@v4
-        with:
-          name: full-release-bundle
-          path: android-release-bundle.zip
+          path: app/build/outputs/apk/debug/app-debug.apk
