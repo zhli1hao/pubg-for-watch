@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <rect width="100%" height="100%" fill="#0f1724"/>
+  <!-- central person (simplified) -->
+  <g fill="#ffffff" opacity="0.95">
+    <circle cx="120" cy="80" r="22" />
+    <rect x="90" y="110" width="60" height="74" rx="8" />
+  </g>
+  <!-- surrounding people (simplified) -->
+  <g fill="#94a3b8" opacity="0.9">
+    <circle cx="40" cy="50" r="10" />
+    <circle cx="200" cy="50" r="10" />
+    <circle cx="40" cy="190" r="10" />
+    <circle cx="200" cy="190" r="10" />
+    <circle cx="120" cy="200" r="12" />
+  </g>
+  <!-- watch on top -->
+  <g fill="#f1f5f9">
+    <rect x="100" y="18" width="40" height="20" rx="6" />
+    <circle cx="120" cy="28" r="6" fill="#0f1724" />
+  </g>
+</svg>
