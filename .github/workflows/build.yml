@@ -1,0 +1,103 @@
+name: Android Auto Build
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p app/src/main/java/com/example/myapp
+          mkdir -p app/src/main/res/values
+      - run: |
+          cat > settings.gradle.kts << 'EOF'
+          pluginManagement {
+              repositories {
+                  google()
+                  gradlePluginPortal()
+              }
+          }
+          rootProject.name = "MyAndroidApp"
+          include(":app")
+          EOF
+      - run: |
+          cat > build.gradle.kts << 'EOF'
+          plugins {
+              id("com.android.application") version "8.1.0" apply false
+          }
+          EOF
+      - run: |
+          cat > app/build.gradle.kts << 'EOF'
+          plugins {
+              id("com.android.application")
+          }
+          android {
+              namespace = "com.example.myapp"
+              compileSdk = 34
+              defaultConfig {
+                  applicationId = "com.example.myapp"
+                  minSdk = 24
+                  targetSdk = 34
+              }
+              buildTypes {
+                  getByName("debug") {
+                      isDebuggable = true
+                  }
+              }
+          }
+          EOF
+      - run: |
+          cat > app/src/main/AndroidManifest.xml << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+              package="com.example.myapp">
+              <application android:label="ZeroInstallApp">
+                  <activity
+                      android:name=".MainActivity"
+                      android:exported="true">
+                      <intent-filter>
+                          <action android:name="android.intent.action.MAIN"/>
+                          <category android:name="android.intent.category.LAUNCHER"/>
+                      </intent-filter>
+                  </activity>
+              </application>
+          </manifest>
+          EOF
+      - run: |
+          cat > app/src/main/java/com/example/myapp/MainActivity.kt << 'EOF'
+          package com.example.myapp
+          import android.app.Activity
+          import android.os.Bundle
+          class MainActivity : Activity() {
+              override fun onCreate(savedInstanceState: Bundle?) {
+                  super.onCreate(savedInstanceState)
+              }
+          }
+          EOF
+      - run: |
+          cat > app/src/main/res/values/strings.xml << 'EOF'
+          <?xml version="1.0" encoding="utf-8"?>
+          <resources>
+              <string name="app_name">ZeroInstallApp</string>
+          </resources>
+          EOF
+      - uses: actions/setup-java@v4
+        with:
+          java-version: "17"
+          distribution: "temurin"
+      - uses: android-actions/setup-android@v4
+      - run: gradle :app:assembleDebug --no-daemon
+      - run: |
+          mkdir -p outputs
+          mv app/build/outputs/apk/debug/app-debug.apk outputs/ 2>/dev/null || true
+          zip -r android-release-bundle.zip . -x "*.git*" -x "*.github*"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: outputs/app-debug.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: full-release-bundle
+          path: android-release-bundle.zip
