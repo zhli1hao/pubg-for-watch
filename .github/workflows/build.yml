@@ -11,18 +11,32 @@ jobs:
       - run: |
           cat > settings.gradle.kts << 'EOF'
           pluginManagement {
-              repositories { google(); gradlePluginPortal() }
+              repositories {
+                  google()
+                  gradlePluginPortal()
+              }
+          }
+          dependencyResolutionManagement {
+              repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+              repositories {
+                  google()
+                  mavenCentral()
+              }
           }
           rootProject.name = "pubg-for-watch"
           include(":app")
           EOF
       - run: |
           cat > build.gradle.kts << 'EOF'
-          plugins { id("com.android.application") version "8.1.0" apply false }
+          plugins {
+              id("com.android.application") version "8.1.0" apply false
+          }
           EOF
       - run: |
           cat > app/build.gradle.kts << 'EOF'
-          plugins { id("com.android.application") }
+          plugins {
+              id("com.android.application")
+          }
           android {
               namespace = "com.example.pubgwatch"
               compileSdk = 34
@@ -43,15 +57,14 @@ jobs:
       - run: |
           cat > app/src/main/AndroidManifest.xml << 'EOF'
           <?xml version="1.0" encoding="utf-8"?>
-          <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-              package="com.example.pubgwatch">
+          <manifest xmlns:android="http://schemas.android.com/apk/res/android">
               <application
                   android:allowBackup="true"
                   android:label="PUBG Watch"
                   android:supportsRtl="true"
                   android:theme="@android:style/Theme.DeviceDefault">
                   <activity
-                      android:name=".MainActivity"
+                      android:name="com.example.pubgwatch.MainActivity"
                       android:exported="true">
                       <intent-filter>
                           <action android:name="android.intent.action.MAIN"/>
