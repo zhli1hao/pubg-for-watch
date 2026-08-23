@@ -1,0 +1,78 @@
+name: Android Auto Build
+
+on:
+  push:
+    branches: [ "main" ] 
+  workflow_dispatch:   
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout existing code
+        uses: actions/checkout@v4
+
+      - name: Auto-create missing Android configs
+        run: |
+          # 补全Gradle配置（如果仓库里没有的话）
+          if [ ! -f "settings.gradle.kts" ]; then
+            echo "rootProject.name = \"MyAndroidApp\"" > settings.gradle.kts
+          fi
+          if [ ! -f "build.gradle.kts" ]; then
+            cat > build.gradle.kts << EOF
+plugins { id("com.android.application") version "8.1.0" apply false }
+EOF
+          fi
+          
+          if [ ! -f "app/build.gradle.kts" ]; then
+            mkdir -p app
+            cat > app/build.gradle.kts << EOF
+plugins { id("com.android.application") }
+android {
+    namespace = "com.example.myapp"
+    compileSdk = 34
+    defaultConfig {
+        applicationId = "com.example.myapp"
+        minSdk = 24
+        targetSdk = 34
+    }
+}
+EOF
+          fi
+          # 补全缺失的资源文件
+          mkdir -p app/src/main/res/values
+          if [ ! -f "app/src/main/res/values/strings.xml" ]; then
+            echo '<?xml version="1.0" encoding="utf-8"?><resources><string name="app_name">ZeroInstallApp</string></resources>' > app/src/main/res/values/strings.xml
+          fi
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Grant Gradle execute permission
+        run: chmod +x gradlew
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug --no-daemon
+
+      - name: Compress build outputs
+        run: |
+          zip -r android-release-bundle.zip \
+            app/ \
+            build.gradle.kts \
+            settings.gradle.kts \
+            app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Upload compressed bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: full-release-bundle
+          path: android-release-bundle.zip
