@@ -1,0 +1,15 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:padding="16dp" android:layout_width="match_parent" android:layout_height="match_parent">
+  <TextView android:text="PUBG WATCH" android:textSize="28sp" android:textColor="@color/pubg_accent"/>
+  <TextView android:text="海岛 · 大逃杀" android:textColor="@color/pubg_text"/>
+  <EditText android:id="@+id/nick" android:hint="昵称" android:textColorHint="#888" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <EditText android:id="@+id/pass" android:hint="密码" android:inputType="textPassword" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <EditText android:id="@+id/pass2" android:hint="确认密码（注册时）" android:inputType="textPassword" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnFull" android:text="账号登录 / 注册" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <EditText android:id="@+id/serial" android:hint="序列号（设备登录）" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <EditText android:id="@+id/devName" android:hint="设备名称" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnDevice" android:text="设备登录 / 注册" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnGuest" android:text="游客登录（昵称+一层密码）" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnDev" android:text="开发者登录" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center"/>
+  <EditText android:id="@+id/devUser" android:hint="开发者账号 001" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <EditText android:id="@+id/devPass" android:hint="开发者密码 admin123" android:inputType="textPassword" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+</LinearLayout>

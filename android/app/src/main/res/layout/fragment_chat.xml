@@ -1,0 +1,7 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:padding="16dp" android:layout_width="match_parent" android:layout_height="match_parent">
+  <TextView android:text="房间聊天" android:textSize="22sp" android:textColor="@color/pubg_accent"/>
+  <TextView android:id="@+id/tvChat" android:textColor="@color/pubg_text" android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+  <EditText android:id="@+id/inputMsg" android:hint="输入消息" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnSend" android:text="发送" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnVoice" android:text="按住说话（语音）" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+</LinearLayout>

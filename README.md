@@ -1,53 +1,15 @@
-# PUBG-for-Watch
-
-This repository contains the code and assets to build and run a minimalistic version of the game PUBG, customized for wearable devices. Follow the instructions below to build and run the project locally.
-
-## Requirements
-
-- A computer with macOS, Windows, or Linux.
-- [Unity Game Engine](https://unity.com/) (version 2021.3 or higher recommended).
-- [Git](https://git-scm.com/) installed for version control.
-- A compatible emulator for your target wearable device.
-
-## Build Instructions
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/zhli1hao/pubg-for-watch.git
-   cd pubg-for-watch
-   ```
-
-2. Open the project in Unity:
-   - Launch the Unity Hub.
-   - Click on "Open Project" and navigate to the folder where you cloned the repository.
-
-3. Set the appropriate platform:
-   - In Unity, click on **File > Build Settings**.
-   - Select your target platform (e.g., Android or watchOS).
-   - Click **Switch Platform**.
-
-4. Install needed dependencies:
-   - Make sure all required plugins or packages are imported into Unity.
-   - You can use the **Package Manager** in Unity to manage dependencies.
-
-5. Build the application:
-   - In Unity, click **File > Build Settings**.
-   - Choose the right build target and set the output directory.
-   - Click **Build and Run** to deploy the game.
-
-## Running the Game
-
-- **On Emulator:**
-  - Use your wearable device emulator to load the built application.
-
-- **On Physical Device:**
-  - Connect your device to the computer via USB or Bluetooth and follow your device's guidelines to install the app.
-
-## Troubleshooting
-
-If you encounter any issues:
-- Check the Unity Console for error messages.
-- Verify that all dependencies are correctly installed.
-- Refer to the [Unity Documentation](https://docs.unity3d.com/) for platform-specific tips.
-
-Enjoy playing PUBG on your watch!
+# PUBG for Watch · v0.0.1 Beta
+轻量版 PUBG 大逃杀（原生 Android，Kotlin + OpenGL ES 2.0），适配手表/手机方形小屏，400MB 内存可跑，不下 Unity，不靠 WebView。
+## 工程结构
+- android/ ：原生 Android 工程（Gradle/AGP 8.1.0 + Gradle 8.2），从 android/ 子目录构建。
+- .github/workflows/ ：三个构建 workflow（单包名多 ABI / arm32 / arm64）。
+## 快速开始（GitHub Actions 自动构建）
+1. 将 android/ 目录上传到仓库根（旧文件可保留，不删除）。
+2. 推送后点 Actions → 工作流自动/手动触发 → 3-5 分钟产出 APK（Artifacts 下载）。
+3. 安装 APK → 打开 → STARTING... → 登录/大厅 → 开始游戏。
+## 功能
+登录（账号/设备/游客/开发者）· 30天游客注销 · 海岛风大厅 · 地图/模式 · 自建房 · 角色/皮肤 · 武器(5+MK14+榴弹炮+配件) · 真3D大逃杀 · 局域网联机(1v1/2v2/2v1/3v3+bot) · 实时同步 · 断线重连 · 好友(本地+Firebase云端) · 文字+LAN语音聊天 · 自适应图标(PUBG WATCH)。
+## 图标替换
+将做好的"PUBG WATCH"图标（三级头角色）各密度 PNG 同名覆盖到 android/app/src/main/res/mipmap-*/ic_launcher.png 即可。
+## 版本
+0.0.1-Beta

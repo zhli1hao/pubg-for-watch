@@ -1,0 +1,10 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:padding="16dp" android:layout_width="match_parent" android:layout_height="match_parent">
+  <TextView android:text="大厅" android:textSize="24sp" android:textColor="@color/pubg_accent"/>
+  <TextView android:id="@+id/tv_map" android:text="地图：平原（点击切换）" android:textColor="@color/pubg_text" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <TextView android:id="@+id/tv_mode" android:text="模式：Solo（点击切换）" android:textColor="@color/pubg_text" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnStart" android:text="开始游戏" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnCreate" android:text="创建房间（自建房）" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnJoin" android:text="加入房间" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnFriends" android:text="好友" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnSettings" android:text="设置" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+</LinearLayout>

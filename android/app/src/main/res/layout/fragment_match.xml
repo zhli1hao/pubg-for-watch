@@ -1,0 +1,10 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:padding="16dp" android:layout_width="match_parent" android:layout_height="match_parent">
+  <TextView android:text="匹配 / 房间" android:textSize="22sp" android:textColor="@color/pubg_accent"/>
+  <EditText android:id="@+id/roomName" android:hint="房间名称" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <EditText android:id="@+id/roomPwd" android:hint="房间密码" android:inputType="textPassword" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <EditText android:id="@+id/hostIp" android:hint="主机 IP（加入时填）" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnHost" android:text="创建房间" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnQuick" android:text="快速匹配（bot补位）" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnDoJoin" android:text="加入房间" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+  <Button android:id="@+id/btnBegin" android:text="开始" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+</LinearLayout>
