@@ -6,10 +6,6 @@ android {
     namespace = "com.pubg.pubgforwatch"
     compileSdk = 34
 
-    androidResources {
-        resourceConfigurations.set(setOf("zh", "en"))
-    }
-
     defaultConfig {
         applicationId = "com.pubg.pubgforwatch"
         minSdk = 24
@@ -20,6 +16,8 @@ android {
         ndk {
             abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
         }
+
+        resourceConfigs.set(setOf("zh", "en"))
     }
 
     buildTypes {
