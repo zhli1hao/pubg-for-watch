@@ -7,7 +7,7 @@ android {
     compileSdk = 34
 
     androidResources {
-        resourceConfigs.set(setOf("zh", "en"))
+        resourceConfigurations.set(setOf("zh", "en"))
     }
 
     defaultConfig {
