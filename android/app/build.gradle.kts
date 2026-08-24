@@ -11,7 +11,8 @@ android {
         minSdk = 24
         targetSdk = 34
         versionCode = 1
-        versionName = "0.0.1"
+        versionName = "0.0.1Beta"
+        archivesBaseName = "PUBG-for-Watch"
 
         ndk {
             abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
