@@ -39,10 +39,12 @@ android {
     }
 }
 
-androidComponents {
-    onVariants(selector().all()) { variant ->
-        variant.outputs.forEach { output ->
-            output.outputFileName.set("PUBG-for-Watch-${variant.versionName}.apk")
+afterEvaluate {
+    applicationVariants.all {
+        outputs.all {
+            if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
+                outputFileName = "PUBG-for-Watch-${versionName}.apk"
+            }
         }
     }
 }
