@@ -21,7 +21,7 @@ jobs:
           cd android
           curl -L https://services.gradle.org/distributions/gradle-8.2-bin.zip -o gradle.zip
           unzip -q gradle.zip
-          ./gradle-8.2/bin/gradle :app:assembleDebug --no-daemon
+          ./gradle-8.2/bin/gradle --settings-file settings.gradle.kts :app:assembleDebug --no-daemon
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
