@@ -39,16 +39,6 @@ android {
     }
 }
 
-afterEvaluate {
-    applicationVariants.all {
-        outputs.all {
-            if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
-                outputFileName = "PUBG-for-Watch-${versionName}.apk"
-            }
-        }
-    }
-}
-
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
